@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class role {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +21,5 @@ public class role {
     private String rolename;
 
     @ManyToMany(mappedBy = "users")
-    private List<user> user= new ArrayList<>();
+    private List<User> user= new ArrayList<>();
 }
