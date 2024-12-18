@@ -1,10 +1,15 @@
 package com.kavindu.land_selling.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,15 +25,20 @@ public class User {
 
     private String username;
 
+    @NotNull
+    @Column(nullable = false)
     private String password;
 
+    @Email
     private String email;
 
     private String phone;
 
-    private Date created_at;
+    @CreationTimestamp
+    private LocalDateTime created_at;
 
-    private Date updated_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
     @ManyToMany
     @JoinTable(
