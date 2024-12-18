@@ -5,22 +5,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+public class Image {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String rolename;
+    private String url;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private Date uploadDate;
+
+    @ManyToOne
+    @JoinColumn(name = "property_id",nullable = false)
+    private Property property;
 }

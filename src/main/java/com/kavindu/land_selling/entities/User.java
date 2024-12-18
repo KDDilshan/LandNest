@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +36,14 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> role;
+    private List<Role> roles;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Property> properties;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_land_request_id",referencedColumnName = "id")
+    private User_Land_Requests user_land_request;
+
 
 }

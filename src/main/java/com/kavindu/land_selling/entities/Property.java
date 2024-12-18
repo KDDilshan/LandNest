@@ -1,11 +1,13 @@
 package com.kavindu.land_selling.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,6 +31,26 @@ public class Property {
 
     private String status;
 
-    @
-    private User seller_id;
+    private Date created_at;
+
+    private Date updated_at;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id",nullable=false)
+    private Categories category;
+
+    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
+    private List<Image> images;
+
+    @ManyToMany
+    @JoinTable(
+            name="property_tag",
+            joinColumns = @JoinColumn(name = "property_id"),
+            inverseJoinColumns = @JoinColumn(name="tag_id")
+    )
+    private Set<Tag> tags;
 }
